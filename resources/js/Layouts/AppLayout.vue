@@ -2,19 +2,35 @@
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import SidebarComponent from '@/Components/SidebarComponent.vue';
-import { ref } from 'vue';
+import { ref, provide } from 'vue';
 
 const isCollapsed = ref(false)
 
 const collapseSidebar = () => {
     isCollapsed.value = !isCollapsed.value;
 }
+
+const selectedColor = ref('')
+provide('color', selectedColor)
+
+const themeColors = ref([
+    'Blue',
+    'Red',
+    'Green'
+])
 </script>
 
 <template>
     <div>
         <div class="flex items-start min-h-screen bg-gray-50">
-            <div class="sticky top-0 z-10 h-screen bg-black duration-150" :class="[ !isCollapsed ? 'w-64' : 'w-16']">
+            <div 
+                class="sticky top-0 z-10 min-h-screen duration-150" 
+                :class="[ 
+                    !isCollapsed ? 'w-64' : 'w-16',
+                    selectedColor == 'Blue' ? 'bg-blue-600' : 'bg-black',
+                    selectedColor == 'Red' ? 'bg-red-600' : 'bg-black',
+                    selectedColor == 'Green' ? 'bg-green-600' : 'bg-black',
+                    ]">
                 <div class="relative p-4">
                     <!-- Trigger -->
                     <span @click="collapseSidebar" class="text-2xl absolute top-4 -right-8 text-gray-400 hover:text-gray-300">
@@ -22,9 +38,14 @@ const collapseSidebar = () => {
                     </span>
 
                     <SidebarComponent :isCollapsed="isCollapsed" />
+
+                    <select v-model="selectedColor" id="color" class="rounded-lg text-sm mt-5">
+                        <option value="">Select a color</option>
+                        <option v-for="(color, index) in themeColors" :key="index" :value="color">{{ color }}</option>
+                    </select>
                 </div>
             </div>
-            <div class="flex-1 h-screen">
+            <div class="flex-1 min-h-screen">
                 <!-- Page Heading -->
                 <header class="" v-if="$slots.header">
                     <div class="flex justify-between items-center max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">

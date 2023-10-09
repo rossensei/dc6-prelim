@@ -1,19 +1,14 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import Card from '@/Components/Card.vue';
-import { Head, Link } from '@inertiajs/vue3';
-
-const prop = defineProps({
-    clientCount: Number
-})
+import { Head } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Suppliers" />
 
     <AppLayout>
         <template #header>
-            <h2 class="text-2xl font-semibold leading-tight text-white">Dashboard</h2>
+            <h2 class="text-2xl font-semibold leading-tight text-white">Supplier List</h2>
         </template>
 
         <div class="py-12">
@@ -22,10 +17,7 @@ const prop = defineProps({
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ prop.clientCount }}</h5>
                     <p class="font-normal text-gray-700 dark:text-gray-400">Total Clients</p>
                 </Link> -->
-
-                <Card :clientCount="clientCount" class="mb-3"/>
-
-                <Card :clientCount="clientCount"/>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis eos alias unde officiis nesciunt doloremque deleniti id expedita, nulla, laborum tenetur saepe perferendis autem non ut earum. Veritatis, explicabo ullam.
             </div>
         </div>
     </AppLayout>

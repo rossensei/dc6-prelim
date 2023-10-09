@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SupplierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/clients', [ClientController::class, 'index'])->name('clients');
+});
+
+Route::middleware('can:manage-suppliers')->group( function() {
+    Route::get('/suppliers', [SupplierController::class, 'index']);
+    Route::get('/suppliers/edit/{supplier}', [SupplierController::class, 'edit']);
+    Route::patch('/supplier', [SupplierController::class, 'update']);
+    Route::delete('/supplier/{supplier}', [SupplierController::class, 'destroy']);
 });
 
 require __DIR__.'/auth.php';
